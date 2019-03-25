@@ -1,0 +1,12 @@
+FROM abbc-ubuntu-bin
+
+#
+# Expose the port for the RPC interface
+#
+EXPOSE 45251/tcp
+ 
+#
+# Start the abbc server
+#
+ENTRYPOINT ["/abbc-master/src/ABBCCoind"]
+CMD ["-conf=/ABBCCoin.conf","-txindex=1"]

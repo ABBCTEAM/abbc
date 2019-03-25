@@ -1,0 +1,18 @@
+FROM abbc-dev
+
+RUN  apt-get update \
+  && apt-get install -y wget
+RUN cd /home && wget http://downloads.sourceforge.net/project/boost/boost/1.65.0/boost_1_65_0.tar.gz \
+  && tar xfz boost_1_65_0.tar.gz \
+  && rm boost_1_65_0.tar.gz \
+  && cd boost_1_65_0 \
+  && ./bootstrap.sh --prefix=/usr/local --with-libraries=program_options \
+  && ./b2 install \
+  && cd /home \
+  && rm -rf boost_1_65_0
+RUN apt-get install --yes libssl1.0 libssl1.0-dev
+RUN wget https://ftp.openssl.org/source/old/1.0.2/openssl-1.0.2k.tar.gz 
+RUN  tar -xvf openssl-1.0.2k.tar.gz 
+RUN	cd openssl-1.0.2k && ./config --prefix=/usr/local/ --openssldir=/usr/local/openssl && make && make install 
+
+RUN git clone https://github.com/abbcfoundation/abbc-master

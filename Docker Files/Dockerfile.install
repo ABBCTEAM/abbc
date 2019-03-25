@@ -1,0 +1,3 @@
+FROM abbc-ubuntu-build
+RUN cd abbc-master/src/leveldb && chmod +x build_detect_platform && make libleveldb.a libmemenv.a
+RUN  cd abbc-master/src / && make -f makefile.unix
